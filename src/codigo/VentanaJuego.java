@@ -19,9 +19,7 @@ import javax.swing.Timer;
  */
 public class VentanaJuego extends javax.swing.JFrame {
     
-    double yVelocidad = 1;
-    Pajaro miPajaro = new Pajaro(40, Color.WHITE);
-    
+
     static int ANCHOPANTALLA = 800;
     static int ALTOPANTALLA = 750;
     
@@ -42,37 +40,15 @@ public class VentanaJuego extends javax.swing.JFrame {
      */
     public VentanaJuego() {
         initComponents();
-        jPanel1.setSize(ANCHOPANTALLA, ALTOPANTALLA);
-        inicializaBuffers();
-        temporizador.start();
+
     }
     
     private void inicializaBuffers(){
-        lienzoGraphics = (Graphics2D) jPanel1.getGraphics();
-        //creo una imagen del mismo ancho y alto que el lienzo
-        buffer = (BufferedImage) jPanel1.createImage(ANCHOPANTALLA, ALTOPANTALLA);
-        //creo una imagen modificable
-        bufferGraphics = buffer.createGraphics();
-        //dibujamos un rectangulo blanco del tamaño del lienzo
-        bufferGraphics.setColor(Color.black);
-        bufferGraphics.fillRect(0,0, ANCHOPANTALLA, ALTOPANTALLA);
+
     }
     
     private void bucleDelJuego(){
-        contador++;
-        if (contador % 50 == 0){
-            contador = 1;
-        }
-        bufferGraphics.setColor(Color.black);
-        bufferGraphics.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA);
-        ////////////////////////////////////////////////////
 
-        //recoloco la nave
-        miPajaro.mueve(bufferGraphics);
-
-        ///////////////////////////////////////////////////
-        lienzoGraphics.drawImage(buffer, 0, 0,null);
-        
     }
     
     /**
@@ -119,7 +95,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        yVelocidad = yVelocidad - 8;
+        
     }//GEN-LAST:event_formKeyPressed
 
     /**
