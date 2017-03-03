@@ -22,5 +22,18 @@ public class Pajaro extends Ellipse2D.Double{
         colorPajaro = _color;
     }
     
-
+public void Mueve (Graphics2D g2){
+        this.y = this.y - yVelocidad;
+        
+        if(this.y < 0){
+            this.y = 0;
+            yVelocidad = -2;
+        }
+        g2.setColor(colorPajaro);
+        g2.fill(this);
+        yVelocidad -=1;
+        if(yVelocidad < -3){
+            yVelocidad = -2;
+        }
+    }
 }

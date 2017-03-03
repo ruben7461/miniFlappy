@@ -6,6 +6,7 @@
 package codigo;
 
 
+import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -19,7 +20,7 @@ import javax.swing.Timer;
  */
 public class VentanaJuego extends javax.swing.JFrame {
     
-
+    Pajaro mipajaro = new Pajaro(30, Color.WHITE);
     static int ANCHOPANTALLA = 800;
     static int ALTOPANTALLA = 750;
     
@@ -40,15 +41,30 @@ public class VentanaJuego extends javax.swing.JFrame {
      */
     public VentanaJuego() {
         initComponents();
-
+        inicializaBuffers();
+        temporizador.start();
+        
     }
     
     private void inicializaBuffers(){
-
+        lienzoGraphics = (Graphics2D) jPanel1.getGraphics();
+        buffer = (BufferedImage) jPanel1.createImage(ANCHOPANTALLA,ALTOPANTALLA);
+        bufferGraphics = buffer.createGraphics();
+        
+        
+        
+        bufferGraphics.setColor(Color.BLACK);
+        bufferGraphics.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA);
     }
     
     private void bucleDelJuego(){
-
+        //limpio la pantalla
+        bufferGraphics.setColor(Color.BLACK);
+        bufferGraphics.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA);
+        
+        //dibujo el pajaro
+        mipajaro.Mueve(bufferGraphics);
+        lienzoGraphics.drawImage(buffer, 0, 0, null);
     }
     
     /**
@@ -95,6 +111,8 @@ public class VentanaJuego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_SPACE)  
+        mipajaro.yVelocidad +=8;
         
     }//GEN-LAST:event_formKeyPressed
 
