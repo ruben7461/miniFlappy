@@ -26,7 +26,7 @@ public class Columna {
     
     public Columna (int _ancho, int _anchopantalla){
         Random aleatorio = new Random();
-        int desplazamiento = aleatorio.nextInt(150);
+        int desplazamiento = aleatorio.nextInt(300);
       capitel = new Rectangle2D.Double(_ancho,-desplazamiento ,ANCHO_COLUMNA, ALTURA_COLUMNA);
       base = new Rectangle2D.Double(_ancho,  ALTURA_COLUMNA + hueco - desplazamiento , ANCHO_COLUMNA, ALTURA_COLUMNA);
       
@@ -37,8 +37,10 @@ public class Columna {
     
     
     public void Mueve (Graphics2D g2){
-        mueveColumna(capitel);
-        mueveColumna(base);
+        
+        //mueve la columna y la base
+        mueveColumna();
+
         
         
         
@@ -49,13 +51,24 @@ public class Columna {
     
     
     
-    private void mueveColumna (Rectangle2D r){
+    private void mueveColumna (){
         
-            if(r.getX()+ ANCHO_COLUMNA < 0){
-                r.setFrame(ancho_pantalla,r.getY(),r.getWidth(),r.getHeight());
+            if(capitel.getX()+ ANCHO_COLUMNA < 0){
+                 Random aleatorio = new Random();
+                 int desplazamiento = aleatorio.nextInt(300);
+                capitel.setFrame(ancho_pantalla,-desplazamiento,
+                        capitel.getWidth(),capitel.getHeight());
+                
+                 base.setFrame(ancho_pantalla, 
+                         ALTURA_COLUMNA + hueco - desplazamiento,
+                         base.getWidth(),base.getHeight());
           }
             else{
-                r.setFrame(r.getX()-1,r.getY(),r.getWidth(),r.getHeight()); 
+                 capitel.setFrame(capitel.getX()-1,capitel.getY(),
+                         capitel.getWidth(),capitel.getHeight());
+                 
+                base.setFrame(base.getX()-1,base.getY(),
+                        base.getWidth(),base.getHeight()); 
             }
     }
 }

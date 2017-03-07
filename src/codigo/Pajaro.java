@@ -36,4 +36,8 @@ public void Mueve (Graphics2D g2){
             yVelocidad = -2;
         }
     }
+public boolean chequeaColision(Columna c){
+    
+    return ( this.intersects(c.capitel) || this.intersects(c.base));
+    }
 }

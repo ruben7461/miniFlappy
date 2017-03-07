@@ -20,10 +20,17 @@ import javax.swing.Timer;
  */
 public class VentanaJuego extends javax.swing.JFrame {
     
+    
+    boolean GameOver = false;
+    
+    
     Pajaro mipajaro = new Pajaro(30, Color.WHITE);
-    static int ANCHOPANTALLA = 800;
+    static int ANCHOPANTALLA = 400;
     static int ALTOPANTALLA = 750;
     static int SEPARACION_COLUMNAS= 150;
+    
+    
+    
     Columna micolumna1 = new Columna(ANCHOPANTALLA, ANCHOPANTALLA);
      Columna micolumna2 = new Columna(ANCHOPANTALLA  + SEPARACION_COLUMNAS,ANCHOPANTALLA);
      Columna micolumna3 = new Columna(ANCHOPANTALLA  + 2*SEPARACION_COLUMNAS,ANCHOPANTALLA);
@@ -36,7 +43,9 @@ public class VentanaJuego extends javax.swing.JFrame {
     Timer temporizador = new Timer(10,new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
+           
             bucleDelJuego();
+            
         }
     });
     
@@ -61,7 +70,14 @@ public class VentanaJuego extends javax.swing.JFrame {
         bufferGraphics.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA);
     }
     
+    
+    
     private void bucleDelJuego(){
+        
+       if( mipajaro.chequeaColision(micolumna1)) {temporizador.stop();}
+        if( mipajaro.chequeaColision(micolumna2)) {temporizador.stop();}
+         if( mipajaro.chequeaColision(micolumna3)) {temporizador.stop();}
+         
         //limpio la pantalla
         bufferGraphics.setColor(Color.BLACK);
         bufferGraphics.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA);
@@ -71,7 +87,9 @@ public class VentanaJuego extends javax.swing.JFrame {
         micolumna1.Mueve(bufferGraphics);
         micolumna2.Mueve(bufferGraphics);
         micolumna3.Mueve(bufferGraphics);
-        micolumna4.Mueve(bufferGraphics);
+        // micolumna4.Mueve(bufferGraphics);
+        
+        
         lienzoGraphics.drawImage(buffer, 0, 0, null);
         
     }
