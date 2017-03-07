@@ -23,7 +23,11 @@ public class VentanaJuego extends javax.swing.JFrame {
     Pajaro mipajaro = new Pajaro(30, Color.WHITE);
     static int ANCHOPANTALLA = 800;
     static int ALTOPANTALLA = 750;
-    
+    static int SEPARACION_COLUMNAS= 150;
+    Columna micolumna1 = new Columna(ANCHOPANTALLA, ANCHOPANTALLA);
+     Columna micolumna2 = new Columna(ANCHOPANTALLA  + SEPARACION_COLUMNAS,ANCHOPANTALLA);
+     Columna micolumna3 = new Columna(ANCHOPANTALLA  + 2*SEPARACION_COLUMNAS,ANCHOPANTALLA);
+     Columna micolumna4 = new Columna(ANCHOPANTALLA  + 3*SEPARACION_COLUMNAS,ANCHOPANTALLA);
     BufferedImage buffer = null;
     Graphics2D bufferGraphics, lienzoGraphics = null;
     
@@ -64,7 +68,12 @@ public class VentanaJuego extends javax.swing.JFrame {
         
         //dibujo el pajaro
         mipajaro.Mueve(bufferGraphics);
+        micolumna1.Mueve(bufferGraphics);
+        micolumna2.Mueve(bufferGraphics);
+        micolumna3.Mueve(bufferGraphics);
+        micolumna4.Mueve(bufferGraphics);
         lienzoGraphics.drawImage(buffer, 0, 0, null);
+        
     }
     
     /**
