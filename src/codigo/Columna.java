@@ -7,20 +7,27 @@ package codigo;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author ruben
  */
 public class Columna {
+  
+     
     
     Rectangle2D capitel,base;
-    int hueco = 100;
-     int ALTURA_COLUMNA = 400;
-      int ANCHO_COLUMNA = 40;
+    Ellipse2D redondeoInferior,redondeoSuperior;
+    int hueco = 80;
+     int ALTURA_COLUMNA = 500;
+      int ANCHO_COLUMNA = 79;
       private  int ancho_pantalla;
+      Image col_abajo,col_arriba;
     
     
     
@@ -31,11 +38,28 @@ public class Columna {
       base = new Rectangle2D.Double(_ancho,  ALTURA_COLUMNA + hueco - desplazamiento , ANCHO_COLUMNA, ALTURA_COLUMNA);
       
       
+      redondeoInferior = new Ellipse2D.Double(_ancho, 
+              ALTURA_COLUMNA + hueco - desplazamiento, 
+              ANCHO_COLUMNA, ANCHO_COLUMNA);
+      
+      
       ancho_pantalla = _anchopantalla;
+      precargaImagenes();
     }
     
     
-    
+    private void precargaImagenes(){
+        col_abajo = (new ImageIcon(new ImageIcon(
+                getClass().getResource("/Imagenes/pipe_bottom.png"))
+                .getImage().getScaledInstance(79,500,Image.SCALE_DEFAULT)))
+                .getImage();
+         
+                
+         col_arriba = (new ImageIcon(new ImageIcon(
+                getClass().getResource("/Imagenes/pipe_top.png"))
+                .getImage().getScaledInstance(79,500,Image.SCALE_DEFAULT)))
+                .getImage();
+    }
     public void Mueve (Graphics2D g2){
         
         //mueve la columna y la base
@@ -45,8 +69,12 @@ public class Columna {
         
         
         g2.setColor(Color.BLUE);
-        g2.fill(capitel);
-        g2.fill(base);
+        //g2.fill(capitel);
+        //g2.fill(base);
+        
+        
+        g2.drawImage(col_abajo, (int)base.getX(),(int)base.getY(),null);
+        g2.drawImage(col_arriba, (int)capitel.getX(),(int)capitel.getY(),null);
     }
     
     
@@ -62,6 +90,7 @@ public class Columna {
                  base.setFrame(ancho_pantalla, 
                          ALTURA_COLUMNA + hueco - desplazamiento,
                          base.getWidth(),base.getHeight());
+                 
           }
             else{
                  capitel.setFrame(capitel.getX()-1,capitel.getY(),

@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package codigo;
-
+import java.awt.geom.Area;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
 /**
@@ -39,5 +40,13 @@ public void Mueve (Graphics2D g2){
 public boolean chequeaColision(Columna c){
     
     return ( this.intersects(c.capitel) || this.intersects(c.base));
+    }
+
+
+public static boolean testIntersection(Shape shapeA, Shape shapeB) {
+   Area areaA = new Area(shapeA);
+   areaA.intersect(new Area(shapeB));
+   return !areaA.isEmpty();
+   
     }
 }
